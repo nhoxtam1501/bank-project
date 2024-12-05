@@ -1,0 +1,35 @@
+name: Build And Deploy Spring App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    name: build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 21
+
+      - name: Setup MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql database: 'demo_bank_project'
+          mysql root password: root
+          mysql user: root
+
+      - name: Unit Tests
+        run: mvn -B test --file pom.xml
+
+      - name: Build the application
+        run: |
+          mvn clean
+          mvn -B package --file pom.xml
