@@ -93,6 +93,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>bank-project</finalName>
     </build>
 
 </project>
