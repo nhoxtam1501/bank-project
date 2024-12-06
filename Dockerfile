@@ -11,5 +11,5 @@ FROM amazoncorretto:21
 EXPOSE 8080
 WORKDIR /app
 
-COPY --from=build /app/target/bank-project.jar bank-project.jar
+COPY --from=build /app/target/bank-project.jar /bank-project.jar
 ENTRYPOINT ["java", "-jar", "/bank-project.jar"]
